@@ -5,3 +5,28 @@ services:
     image: redis:4.0.9
     ports:
       - 6379:6379
+    volumes: 
+      - ./redis-data:/data
+      #redis-data #фаловая система создется docker-ом
+    command: 'redis-server --appendonly yes'
+  mongo:
+    image: mongo:3.6.3
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo-data:/data/db
+  postgres:
+    image: postgres:10.12
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB:postgres_db  
+      POSTGRES_USER:postgres
+      POSTGRES_PASSWORD:password 
+    volumes:
+      - ./pg-data:/var/lib/postgresql/data      
+      
+#volumes:
+    #redis-data: #фаловая система создется docker-ом
+    #mongo-data:
+    #pg-data
