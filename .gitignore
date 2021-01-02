@@ -1,3 +1,5 @@
 .idea
 /vendor
 /nbproject/private/
+/mongo-data
+/pg-data

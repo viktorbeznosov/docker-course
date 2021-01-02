@@ -7,57 +7,60 @@ services:
     ports:
       - 80:80
     volumes:
-      - /docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./web:/home/viktor/docker/www/project/web
 #      - /var/run/php/php7.2-fpm.sock:/var/run/php/php7.2-fpm.sock
-    
-#  redis:
-#    image: redis:4.0.9
-#    ports:
-#      - 6379:6379
-#    volumes:
-#      - ./redis-data:/data
-#      #redis-data #фаловая система создется docker-ом
-#    command: 'redis-server --appendonly yes'
-#
-#  mongo:
-#    image: mongo:3.6.3
-#    ports:
-#      - 27017:27017
-#    volumes:
-#      - ./mongo-data:/data/db
-#
-#  postgres:
-#    image: postgres:10.12
-#    ports:
-#      - 5432:5432
-#    environment:
-#      - POSTGRES_DB:postgres_db
-#      - POSTGRES_USER:postgres
-#      - POSTGRES_PASSWORD:password
-#    volumes:
-#      - ./pg-data:/var/lib/postgresql/data
-#
-#  mysql:
-#    image: mysql:5.7.30
-#    ports:
-#      - 3306:3306
-#    volumes:
-#      - ./mysql-data:/var/lib/mysql
-#    restart: always
-#    environment:
-#      - MYSQL_DATABASE:mysql_db
-#      - MYSQL_ROOT_PASSWORD:password
-#      #MYSQL_USER:root
-#      #MYSQL_PASSWORD:password
-#
-##  phpmyadmin:
-##    image: phpmyadmin
-##    restart: always
-##    ports:
-##      - 8080:80
-##    environment:
-##      - PMA_ARBITRARY=1
+
+  redis:
+    image: redis:4.0.9
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis-data:/data
+      #redis-data #фаловая система создется docker-ом
+    command: 'redis-server --appendonly yes'
+
+  mongo:
+    image: mongo:3.6.3
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo-data:/data/db
+
+  postgres:
+    image: postgres:10.12
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB:postgres_db
+      - POSTGRES_USER:postgres
+      - POSTGRES_PASSWORD:password
+    volumes:
+      - ./pg-data:/var/lib/postgresql/data
+
+  mysql:
+    image: mysql:5.7.30
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: mysql_db
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 12345
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    links:
+      - mysql
+    ports:
+      - 8001:80
+    environment:
+      PMA_HOST: mysql
+      MYSQL_USERNAME: user
+      MYSQL_PASSWORD: 12345
+#      MYSQL_ROOT_PASSWORD: root
 #
 ##volumes:
 #    #redis-data: #фаловая система создется docker-ом
