@@ -2,8 +2,8 @@
 
 return [
     'class' => yii\db\Connection::class,
-    'dsn' => 'mysql:host=localhost:3306;dbname=mysql_db',
-    'username' => 'root',
-    'password' => 'password',
+    'dsn' => 'mysql:host=mysql;dbname=mysql_db',
+    'username' => 'user',
+    'password' => '12345',
     'charset' => 'utf8',
 ];
